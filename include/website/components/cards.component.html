@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="book_display_container_cards">
+        <div class="book_card" data-ng-repeat="product in products | limitTo:$parent.rowLimits | orderBy:$parent.sortColumn | filter:$parent.searchText">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><img class="image_size" data-ng-src="{{ product.image_urls }}"></td>
+                        </tr>
+                        <tr class="spacer"></tr>
+                        <tr>
+                            <td class="book_author">{{ product.author }}</td>
+                        </tr>
+                        <tr>
+                            <td class="smalltext">{{product.title}}</td>
+                        </tr>
+                        <tr>
+                            <td class="book_price">{{ product.price | currency: "SEK" : fractionSize }}</td>
+                        </tr>
+                        <tr>
+                            <td><span class="smalltext">Välj antal böcker:</span></td>  
+                        </tr>
+                        <tr>
+                            <td><input class="quantity smalltext" type="number" name="quantity" id="quantity" data-ng-model="product.quantity"></td>   
+                        </tr>
+                        <tr>
+                            <td><span class="smalltext">{{ product.price * product.quantity }} :-</span></td>   
+                        </tr>
+                        <tr>
+                            <td class="stars"><div class="stars-outer"><div class="stars-inner" ng-style="{ 'width': rating(product.rating) }"></div></div><span class="number-rating"> {{product.totalratings}} st omdömen</span></td>
+                        </tr>
+                        <tr>
+                            <td><button class="btn btn-primary btn-sm cart_button" data-ng-click="addItem(product)">Lägg i kundvagn</button></td>
+                        </tr>
+                    </tbody>
+                </table> 
+        </div>
+    </div>
+</div>

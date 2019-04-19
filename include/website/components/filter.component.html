@@ -1,0 +1,36 @@
+<section class="filter_books">
+<div class="container">
+        <div class="filter_container">
+            <div class="filter_menu_left">
+                <div class="filter_menu_dots"><button class="bg-transparent border-0" data-ng-click="changeBookComponent('cards.component.html')"><i class="fas fa-th cards_button"></i></button></div>
+                <div class="filter_menu_bars"><button class="bg-transparent border-0" data-ng-click="changeBookComponent('rows.component.html')"><i class="fas fa-bars rows_button"></i></button></div>
+            </div>
+            <div class="filter_menu_right">
+                <select id="select_row_limit" data-ng-model="$parent.rowLimits">
+                    <option value="">Välj hur många böcker som ska visas</option>
+                    <option value="3">Visa 1-3 av 21 resultat</option>
+                    <option value="6">Visa 1-6 av 21 resultat</option>
+                    <option value="9">Visa 1-9 av 21 resultat</option>
+                    <option value="12">Visa 1-12 av 21 resultat</option>
+                    <option value="15">Visa 1-15 av 21 resultat</option>
+                    <option value="18">Visa 1-18 av 21 resultat</option>
+                    <option value="21">Visa 1-21 av 21 resultat</option>
+                </select>
+                <select id="select_filter_by" data-ng-model="$parent.sortColumn">
+                    <option value="">Sortera på</option>
+                    <option value="+author">Författare A-Ö</option>
+                    <option value="-author">Författare Ö-A</option>
+                    <option value="+title">Titel A-Ö</option>
+                    <option value="-title">Titel Ö-A</option>
+                    <option value="+price">Pris Högst till lägst</option>
+                    <option value="-price">Pris Lägst till högst</option>
+                    <option value="+rating">Omdöme Lägst till högst</option>
+                    <option value="-rating">Omdöme Högst till lägst</option>
+                    <option value="category">Kategori</option>
+                    <option value="lang">Språk</option>
+                </select>
+                <input type="text" placeholder="Sök på författare, titel, pris" data-ng-model="$parent.searchText">
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,35 @@
+<div class="sticky-top">
+    <section class="header">
+        <div class="container_fluid">
+            <div class="header_wrap">
+                <div class="logotype_container">
+                    <img src="images/logotype.svg" height="50px" class="logotype-image" alt="pohat company logotype">
+                </div>
+                <div id="header_lang_select">
+                    <select name="" id="">
+                        <option value="en">EN</option>
+                        <option value="swe">SWE</option>
+                        <option value="nor">NOR</option>
+                        <option value="fin">FIN</option>
+                    </select>
+                </div>
+                <div class="header_phone_number">
+                    <p>+90878 87 878 7</p>
+                </div>
+                <nav>
+                    <ul>
+                        <li><button class="bg-transparent border-0" data-ng-click="changeBookComponent('cards.component.html')">Home</button></li>
+                        <li><button class="bg-transparent border-0" data-ng-click="changeBookComponent('about.component.html')">About</button></li>
+                        <li><button class="bg-transparent border-0" data-ng-click="changeBookComponent('services.component.html')">Services</button></li>
+                        <li><button class="bg-transparent border-0" data-ng-click="changeBookComponent('pages.component.html')">Pages</button></li>
+                        <li><button class="bg-transparent border-0" data-ng-click="changeBookComponent('news.component.html')">News</button></li>
+                        <li><button class="bg-transparent border-0" data-ng-click="changeBookComponent('contact.component.html')">Contact</button></li>
+                    </ul>
+                </nav>
+                <div class="quote">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shoppingCartModal"><i class="fas fa-cart-arrow-down"></i><span class="badge badge-pill" data-ng-class="badgeColor">{{ getQuantity() }}</span></button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
