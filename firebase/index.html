@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="bookShopApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Angularjs & Backbonejs Inlämningsuppgift 3</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<!-- START SECTION TOP NAVIGATION -->
+    <section class="top_nav" id="top">
+        <div class="container_fluid">          
+            <div class="top_wrap">
+                <div class="social_icons">
+                    <ul>
+                        <li><a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://www.behance.net/"><i class="fab fa-behance"></i></a></li>
+                        <li><a href="https://www.pinterest.com"><i class="fab fa-pinterest"></i></a></li>
+                        <li><a href="https://www.youtube.com"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="terms.html">TERMS</a></li>
+                    </ul>
+                </div>
+                <div class="mail_menu">
+                    <ul>
+                        <li><i class="far fa-envelope"></i></li>
+                        <li><a href="#">info@webmail.com</a></li>
+                    </ul>
+                </div>
+            </div><!--end top_wrap-->
+        </div><!--end container_fluid-->
+    </section>
+<!-- END SECTION TOP NAVIGATION -->
+
+<!-- START SECTION HEADER -->
+    <div class="sticky-top">
+        <section class="header">
+            <div class="container_fluid">
+                <div class="header_wrap">
+                    <div class="logotype_container">
+                        <img src="images/logotype.svg" height="50px" class="logotype-image" alt="pohat company logotype">
+                    </div>
+                    <div id="header_lang_select">
+                        <select name="" id="">
+                            <option value="en">EN</option>
+                            <option value="swe">SWE</option>
+                            <option value="nor">NOR</option>
+                            <option value="fin">FIN</option>
+                        </select>
+                    </div>
+                    <div class="header_phone_number">
+                        <p>+90878 87 878 7</p>
+                    </div>
+                    <nav>
+                        <ul>
+                            <!-- <li><button class="bg-transparent border-0" data-ng-click="#!cards">Home</button></li>
+                            <li><button class="bg-transparent border-0" data-ng-click="#!about">About</button></li>
+                            <li><button class="bg-transparent border-0" data-ng-click="#!services">Services</button></li>
+                            <li><button class="bg-transparent border-0" data-ng-click="#!pages">Pages</button></li>
+                            <li><button class="bg-transparent border-0" data-ng-click="#!news">News</button></li>
+                            <li><button class="bg-transparent border-0" data-ng-click="#!contact">Contact</button></li>
+         -->
+                            <li><a href="#!cards">Home</a></li>
+                            <li><a href="#!about">About</a></li>
+                            <li><a href="#!services">Services</a></li>
+                            <li><a href="#!pages">Pages</a></li>
+                            <li><a href="#!news">News</a></li>
+                            <li><a href="#!contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                    <div class="quote">                      
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shoppingCartModal"><i class="fas fa-cart-arrow-down"></i><span class="badge badge-pill" data-ng-class="badgeColor">{{ getQuantity() }}</span></button>
+                    </div>                  
+                </div><!--end header_wrap-->
+            </div><!--end container_fluid-->
+        </section>
+    </div>
+<!-- END SECTION HEADER -->
+
+<!-- START MODAL -->
+<div class="modal fade" id="shoppingCartModal" tabindex="-1" role="dialog" aria-labelledby="shoppingCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="shoppingCartModalLabel">Din varukorg:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <div class="modal-body">
+            <div class="mt-5">
+                <p>{{ emptycart }}</p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="spacer"></th><th>Antalböcker</th><th>Författare</th><th>Titel</th><th>Pris</th>
+                        </tr>                              
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="product in cart">
+                           <td><img class="shoppingcart_image" data-ng-src="{{ product.img_urls }}"></td><td>{{ product.quantity }} st</td><td>{{ product.author }}</td><td>{{ product.title }}</td><td>{{ getProductCost(product) }} kr</td><td><button class="btn btn-link remove-item" data-ng-click="removeItem(product)"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>
+                    </tbody>
+                
+                </table>
+                <h4 class="mt-5"><i class="fas fa-shopping-cart"></i> TOTALT: {{ getTotal() }} SEK</h4>
+            </div>
+        </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- END MODAL -->
+
+<!-- START SECTION HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero_text_container">
+                <p>DIGITAL MARKETING</p>
+                <h1>Product Store</h1>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li>|</li>
+                    <li><a href="shop.html">Shop</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </section>
+<!-- END SECTION HERO -->
+
+<!-- START SECTION SHIPPING -->
+    <section class="shipping">
+        <div class="container">
+            <div class="shipping_container">
+                <div class="shipping_box">
+                    <tr rowspan="2">
+                    <img src="images/truck.svg" alt="picture on a truck">
+                    <h4>Free Shipping</h4>
+                    <p>Orders over $100</p>
+                </div>
+                <div class="shipping_box">
+                    <img src="images/clock.svg" alt="picture on a clock">
+                    <h4>Free Return</h4>
+                    <p>In 30 days</p>
+                </div>
+                <div class="shipping_box">
+                    <img src="images/lock.svg" alt="picture on a lock">
+                    <h4>100% Secure</h4>
+                    <p>Shipping</p>
+                </div>
+                <div class="shipping_box">
+                    <img src="images/tag.svg" alt="picture on a tag">
+                    <h4>Best Price</h4>
+                    <p>Granted</p>
+                </div>
+            </div><!--end shipping_container-->
+        </div><!--end container-->
+    </section>
+<!-- END SECTION SHIPPING -->
+
+<!-- START SECTION FILTER BOOKS -->
+    <section class="filter_books">
+        <div class="container">
+            <div class="filter_container">
+                <div class="filter_menu_left">
+                    <div class="filter_menu_dots"><a href="#!cards"><img src="images/dots.svg" alt=""></a></div>
+                    <div class="filter_menu_bars"><a href="#!rows"><img src="images/bars.svg" alt=""></a></div>
+                </div>
+                <div class="filter_menu_right">
+                    <select id="select_row_limit" data-ng-model="rowLimits">
+                        <option value="" >Välj hur många böcker som ska visas</option>
+                        <option value="3">Visa 1-3 av 21 resultat</option>
+                        <option value="6">Visa 1-6 av 21 resultat</option>
+                        <option value="9">Visa 1-9 av 21 resultat</option>
+                        <option value="12">Visa 1-12 av 21 resultat</option>
+                        <option value="15">Visa 1-15 av 21 resultat</option>
+                        <option value="18">Visa 1-18 av 21 resultat</option>
+                        <option value="21">Visa 1-21 av 21 resultat</option>
+                    </select>
+                    <!-- <p>Showing 1-12 of 30 results</p> -->
+                    <select id="select_filter_by" data-ng-model="sortColumn">
+                        <option value="" default>Sortera på</option>
+                        <option value="+author">Författare A-Ö</option>
+                        <option value="-author">Författare Ö-A</option>
+                        <option value="+title">Titel A-Ö</option>
+                        <option value="-title">Titel Ö-A</option>
+                        <option value="+price">Pris Lägst till Högst</option>
+                        <option value="-price">Pris Högst till Lägst</option>
+                        <option value="category">Kategori</option>
+                        <option value="lang">Språk</option>
+                        <option value="-rating">Rating Högst till lägst</option>
+                        <!-- <option value="category">Kategori</option> -->
+                    </select>
+                    <input type="text" placeholder="Sök på författare, titel, pris" data-ng-model="searchText">
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- END SECTION FILTER BOOKS -->
+
+<!-- START SECTION BOOK DISPLAY -->
+    <section class="book_display">
+        <div class="container" data-ng-controller="bookController">
+            <div data-ng-view></div>
+        </div><!--end container-->
+    </section>
+<!-- END SECTION BOOK DISPLAY -->
+
+<!-- START SECTION BOOK NAVIGATION -->
+    <section class="book_navigation">
+        <div class="container">
+            <div class="book_navigation_container">
+                <ul>
+                    <li><a href="#"><i class="fas fa-arrow-left"></i></a></li>
+                    <li><a href="#">01</a></li>
+                    <li><a href="#" id="number_two">02</a></li>
+                    <li><a href="#"><i class="fas fa-ellipsis-h"></i></a></li>
+                    <li><a href="#">04</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+<!-- END SECTION TOP BOOK NAVIGATION -->
+
+<!-- START SECTION FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer_top_container">
+                <div class="footer_left">
+                    <img src="images/logotype_white.svg" height="50px" alt="pohat company logotype">
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab itaque eum mollitia est blanditiis placeat architecto! Modi enim quas fuga! Nobis fugiat reprehenderit magni, voluptatibus ullam quaerat? Mollitia consectetur a sunt ducimus rem, repudiandae reprehenderit ullam.</p>
+                    <ul>
+                        <li><a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="https://www.twitter.com"><i id="white" class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://www.behance.net/"><i class="fab fa-behance"></i></a></li>
+                        <li><a href="https://www.youtube.com"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="https://www.pinterest.com"><i class="fab fa-pinterest"></i></a></li>
+                    </ul>
+                </div>
+                <div class="footer_middle">
+                    <h1>More Links<span class="dot">.</span></h1>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Paid CEO</td><td class="td_spacer"></td><td>Services</td>
+                            </tr>
+                            <tr class="spacer"></tr>
+                            <tr>
+                                <td>Digital Marketing</td><td class="td_spacer"></td><td>Our Team</td>
+                            </tr>
+                            <tr class="spacer"></tr>
+                            <tr>
+                                <td>Strategy Planning</td><td class="td_spacer"></td><td>News</td>
+                            </tr>
+                            <tr class="spacer"></tr>
+                            <tr>
+                                <td>Offline CEO</td><td class="td_spacer"></td><td>Shop</td>
+                            </tr>
+                            <tr class="spacer"></tr>
+                            <tr>
+                                <td>Page Rank Up</td><td class="td_spacer"></td><td>Contact Us</td>
+                            </tr>
+                            <tr class="spacer"></tr>
+                            <tr>
+                                <td>User Panel</td><td class="td_spacer"></td><td>Book Appointment</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer_right">
+                    <h1>News Feed<span class="dot">.</span></h1>
+
+                    <div class="footer_right_content">
+                        <img src="images/square.png" alt="">
+                        <p>Lorem ipsum dolor, sit am
+                        et consectetur.
+                        <span>14 july, 2019</span></p>
+                        
+                    </div>
+                    <div class="footer_right_content">
+                        <img src="images/square.png" alt="">
+                        <p>Lorem ipsum dolor, sit am
+                        et consectetur.
+                        <span>14 july, 2019</span></p>
+                    </div>
+                    <div class="footer_right_content">
+                        <img src="images/square.png" alt="">
+                        <p>Lorem ipsum dolor, sit am
+                        et consectetur.
+                        <span>14 july, 2019</span></p>
+                    </div>
+
+                </div>
+            </div><!--end footer_top_container-->
+                <div class="footer_bottom" data-ng-controller="getYear">
+                    <p>Copyright By&copy;<span data-ng-controller="getYear">NilArtStudio - </span>{{date | date:'yyyy'}}</p>
+                    <button onclick="topFunction()" id="myBtn">back to top</button>
+                </div>
+        </div><!--end container-->
+    </footer>
+ <!-- END SECTION TOP FOOTER -->
+
+<!-- BOOTSTRAP SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+ <!-- ANGULAR JS -->
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular-route.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular-cookies.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular-animate.min.js"></script>
+
+ <!-- UNDERSCORE -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+
+ <!-- FIRESTORE -->
+ <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-firestore.js"></script>
+
+ <!-- START FIREBASE INIT -->
+<script>
+  var config = {
+    apiKey: "AIzaSyCQHhUv4ZtdWei7UAJZhR7d9z96ZXvXFq4",
+    authDomain: "bookstoreapp-7fa45.firebaseapp.com",
+    databaseURL: "https://bookstoreapp-7fa45.firebaseio.com",
+    projectId: "bookstoreapp-7fa45",
+    storageBucket: "bookstoreapp-7fa45.appspot.com",
+    messagingSenderId: "1014045748044"
+  };
+  firebase.initializeApp(config);
+  const db = firebase.firestore();
+</script>
+<!-- END FIREBASE INIT -->
+
+<!-- MY SCRIPTS -->
+<script src="js/script.js"></script>
+<script src="controller/controllers.js"></script>
+<script src="routing/routes.js"></script>
+</body>
+</html>

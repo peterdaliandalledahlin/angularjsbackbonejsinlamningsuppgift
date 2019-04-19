@@ -1,0 +1,42 @@
+<div class="book_display_container_rows">
+    <div class="book_card" data-ng-repeat="product in products | limitTo:rowLimits | orderBy:sortColumn | filter: searchText">
+        <div class="product_row">
+            <div class="book_display_left">
+                <img  data-ng-src="{{ product.img_urls }}">
+            </div>
+            <div class="book_display_middle">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="book_author">{{ product.author }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="book_title" id="table_spacer">{{ product.title }}</td>
+                        </tr>
+                        <tr class="spacer"></tr>
+                        <tr>
+                            <td class="smalltext">Kategori</td><td class="spacer"></td><td class="book_price">{{ product.category }}</td>
+                        </tr>
+                        <tr>
+                            <td class="smalltext">Språk</td><td class="spacer"></td><td class="book_price">{{ product.lang }}</td>
+                        </tr>
+                        <tr>
+                            <td class="smalltext">Lagersaldo</td><td class="spacer"></td><td class="book_price">{{ product.instock }} st</td>
+                        </tr>
+                        <tr>
+                            <td class="smalltext">Omdöme</td><td class="spacer"></td><td class="stars"><div class="stars-outer"><div class="stars-inner" ng-style="{ 'width': rating(product.rating) }"></div></div><span class="number-rating"> {{product.totalratings}} st omdömen</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="book_display_right">
+                <p class="book_price">{{ product.price }} kr</p>
+                <span class="smalltext">Välj antal böcker:</span>
+                <input class="quantity smalltext" type="number" name="quantity" id="quantity" data-ng-model="product.quantity">
+                <span class="smalltext">{{ product.price * product.quantity }} :-</span>
+
+                <button class="btn btn-primary btn-sm cart_button" data-ng-click="addItem(product)">Lägg i kundvagn</button>
+            </div>
+        </div>
+    </div>
+</div>
