@@ -3,6 +3,7 @@ var app = angular.module("bookShopApp", ["ngRoute", "ngCookies", "ngAnimate"]);
     app.run(function ($rootScope, $cookies){
 
         var storedCart =  $cookies.getObject('shoppingcart');
+
         if (storedCart) {
         $rootScope.cart = storedCart;
         } else {
@@ -20,7 +21,7 @@ var app = angular.module("bookShopApp", ["ngRoute", "ngCookies", "ngAnimate"]);
             .otherwise({ redirectTo: "/"});
     });
     
-    app.controller("homeController", function($rootScope, $http)  {
+    app.controller("homeController", function($rootScope, $http, $cookies)  {
 
         $http.get("http://localhost:3001/api/products").then((res) => $rootScope.products = res.data);
 
@@ -58,7 +59,7 @@ var app = angular.module("bookShopApp", ["ngRoute", "ngCookies", "ngAnimate"]);
 
         //set cookie function
         $rootScope.persistCart = function(){
-            var expireDate = new Date();
+            let expireDate = new Date();
             expireDate.setDate(expireDate.getDate() +7);
             $cookies.putObject('shoppingcart', $rootScope.cart, {'expires': expireDate});
         }
